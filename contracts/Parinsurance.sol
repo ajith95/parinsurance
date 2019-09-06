@@ -1,8 +1,11 @@
 pragma solidity 0.5.8;
 pragma experimental ABIEncoderV2;
 
+
+
 contract Parinsurance {
     // Model a Insurance Smart Contract
+      
     struct Insurer {
         uint companyId;
         string companyName;
@@ -40,24 +43,30 @@ contract Parinsurance {
     // Constructor
     constructor () public {
         
-       addInsurer(101,"Infosys",111,"ABC","abc@gmail.com",true,"IX-789");
+       addInsurer(101,"Infosys",111,"ABC","abc@gmail.com",true,"IX-789","2019-11-11","10.00");
        // addInsurer("TCS");
     }
 
-    function addInsurer (uint companyId,string companyName,uint empId,string empName,string empEmail,bool isInsured,string flightNo,string flightDate,string flightTime,bool isDelayed) private {
+    function addInsurer (uint companyId,string memory companyName,uint empId,string memory empName,string memory empEmail,bool isInsured,string memory flightNo,string  memory flightDate,string memory flightTime) private {
         //insCount ++;
-    insurers[empId+flightNo] = Insurer(companyId, companyName,empId,empName,empEmail,isInsured,Flight(flightNo,flightDate,flightTime,isDelayed),Claims(claimsAmt,isClaimsPaid));
+         
+    insurers[flightNo] = Insurer(companyId, companyName,empId,empName,empEmail,isInsured,Flight(flightNo,flightDate,flightTime,false),Claims(0,false));
 
     
     }
 
-    
+    function updateFlightStatus(string memory flightNo) private {
+
+                  Insurer memory i = insurers[flightNo];
+                  i.flight.isDelayed = true;
 
 
-    function updateFlightStatus(uint empId,string memory flightNo)
-    {
-
+             
+         
     }
+
+
+    
 
 
 }
