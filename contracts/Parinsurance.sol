@@ -47,7 +47,7 @@ contract Parinsurance {
        // addInsurer("TCS");
     }
 
-    function addInsurer (uint companyId,string memory companyName,uint empId,string memory empName,string memory empEmail,bool isInsured,string memory flightNo,string  memory flightDate,string memory flightTime) private {
+    function addInsurer (uint companyId,string memory companyName,uint empId,string memory empName,string memory empEmail,bool isInsured,string memory flightNo,string  memory flightDate,string memory flightTime) public {
         //insCount ++;
          
     insurers[flightNo] = Insurer(companyId, companyName,empId,empName,empEmail,isInsured,Flight(flightNo,flightDate,flightTime,false),Claims(0,false));
@@ -55,13 +55,14 @@ contract Parinsurance {
     
     }
 
-    function updateFlightStatus(string memory flightNo) private {
+    function updateFlightStatus(string memory flightNo) public {
 
-                  Insurer memory i = insurers[flightNo];
-                  i.flight.isDelayed = true;
+                  insurers[flightNo].flight.isDelayed = true;
+                  //i.flight.isDelayed = true;
+                  //insurers[flightNo] = i;
 
 
-             
+        
          
     }
 
